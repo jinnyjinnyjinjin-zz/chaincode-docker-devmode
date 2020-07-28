@@ -123,7 +123,7 @@ peer chaincode query -n mycc -c '{"Args":["query","a"]}' -o orderer:7050 -C myc
 ```shell script
 90
 ```
-
+## Chaincode Log
 이러한 과정은 앞서 체인코드를 실행한 `chaincode` 도커 컨테이너 터미널창의 체인코드 로그를 통해 호출한 내용을 확인할 수 있습니다.
 ```shell script
 ex02 Init
