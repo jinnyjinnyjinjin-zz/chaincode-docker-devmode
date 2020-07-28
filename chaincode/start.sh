@@ -1,0 +1,1 @@
+CORE_CHAINCODE_ID_NAME=mycc:0 CORE_PEER_TLS_ENABLED=false ./chaincode_example02/chaincode_example02 -peer.address peer:7052

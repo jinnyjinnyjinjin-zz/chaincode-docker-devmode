@@ -1,0 +1,1 @@
+peer chaincode install -p chaincodedev/chaincode/chaincode_example02 -n mycc -v 0
