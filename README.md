@@ -13,7 +13,7 @@ https://hyperledger-fabric.readthedocs.io/en/release-1.4/peer-chaincode-devmode.
 https://hyperledger-fabric.readthedocs.io/en/release-1.4/prereqs.html
 
 ## Chaincode
-`fabric-samples` 에 포함된 체인코드들 중 `chaincode_example02` 를 활용 했습니다. 
+`fabric-samples/chaincode/` 디렉토리에 포함된 샘플 체인코드들 중 `chaincode_example02` 를 활용 했습니다. 
 
 ## 적용 방법
 1. 하이퍼레저 네트워크를 실행 합니다.
