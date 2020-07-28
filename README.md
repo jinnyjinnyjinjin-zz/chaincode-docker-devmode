@@ -15,7 +15,7 @@ https://hyperledger-fabric.readthedocs.io/en/release-1.4/prereqs.html
 ## Chaincode
 `fabric-samples` 에 포함된 체인코드들 중 `chaincode_example02` 를 활용 했습니다. 
 
-## 실행 방법
+## 적용 방법
 1. 하이퍼레저 네트워크를 실행 합니다.
 ```shell script
 $ docker-compose -f docker-compose-simple.yaml up -d
@@ -44,20 +44,20 @@ f6f25747239b        hyperledger/fabric-orderer   "orderer"                3 minu
 $ docker exec -it chaincode bash
 ```
 4. 컨테이너 접속 후에 `chaincode` 디렉토리로 이동합니다.
-```shell script
+```
 # cd chaincode_example02/
 ```
 5. build 스크립트를 실행하여 체인코드를 빌드 합니다. 
-```shell script
+```
 # ./build.sh
 ```
 스크립트 실행 후, 다음과 같은 에러가 난다면 `chmod` 명령어로 권한을 변경합니다.
-```shell script
+```
 # bash: ./start.sh: Permission denied
 # chmod 777 start.sh                        # 권한 변경
 ```
 정상적으로 실행된다면 아무런 결과내용 없이 약 10초 후에 커서가 돌아옵니다.
-```shell script
+```
 # ./build.sh
 .
 .
@@ -67,7 +67,7 @@ $ docker exec -it chaincode bash
 ![image_1](./doc/image_1.png)   
 
 7. 파일을 실행하여 내부에서 해당 체인코드의 컨테이너를 실행합니다. (하이퍼레저 네트워크에서는 peer 가 chaincode 도커 컨테이너를 실행 시킵니다.)
-```shell script
+```
 # ./start.sh
 ```
 스크립트 파일을 실행하면 다음과 같이 체인코드가 실행되고 체인코드를 호출할 때 여기에 로그가 찍힙니다. 이 상태로 그대로 둡니다.
@@ -87,7 +87,7 @@ $ docker exec -it chaincode bash
 $ docker exec -it cli bash
 ```
 9. 먼저 install 쉘 파일을 실행하여 체인코드를 install 합니다.
-```shell script
+```
 # ./install.sh
 ```
 성공적으로 install 이 완료되면 상태코드 200 과 OK 라는 메시지가 떨어집니다.
@@ -95,7 +95,7 @@ $ docker exec -it cli bash
 2020-07-28 08:29:23.411 UTC [chaincodeCmd] install -> INFO 04e Installed remotely response:<status:200 payload:"OK" >
 ```
 10. 다음은 instantiate 을 진행합니다.
-```shell script
+```
 # ./instantiate.sh
 ```
 instantiate 도 완료되었습니다.
@@ -108,7 +108,7 @@ instantiate 도 완료되었습니다.
 2020-07-28 09:03:57.595 UTC [msp.identity] Sign -> DEBU 04e Sign: digest: CF7BDEF27FD0AA258623945319B522FC2D9206B0732533AB88FE723D0ED1992A
 ```
 11. 이제 설치된 체인코드의 `invoke` 함수를 호출하여 데이터를 넣고 트랜잭션을 전송 합니다.
-```shell script
+```
 # peer chaincode invoke -n mycc -c '{"Args":["invoke","a","b","10"]}' -o orderer:7050 -C myc
 ```
 결과(성공)
@@ -133,5 +133,5 @@ Aval = 90, Bval = 210
 ex02 Invoke
 Query Response:{"Name":"a","Amount":"90"}
 ```
-
-##### 체인코드를 수정하고 네트워크에 적용할때에는, install & instantiate 를 다시 할 필요없이 다시 `build` 하고 `start` 만 하면 수정된 내용이 반영 되어서 비교적 간단하게 테스트할 수 있습니다.
+## Conclusion
+체인코드를 수정하고 네트워크에 적용할때에는, install & instantiate 를 다시 할 필요없이 다시 `build` 하고 `start` 만 하면 수정된 내용이 반영 되어서 비교적 간단하게 테스트할 수 있습니다.
