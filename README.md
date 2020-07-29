@@ -43,18 +43,14 @@ f6f25747239b        hyperledger/fabric-orderer   "orderer"                3 minu
 ```shell script
 $ docker exec -it chaincode bash
 ```
-4. 컨테이너 접속 후에 `chaincode` 디렉토리로 이동합니다.
-```
-# cd chaincode_example02/
-```
-5. build 스크립트를 실행하여 체인코드를 빌드 합니다. 
+4. build 스크립트를 실행하여 체인코드를 빌드 합니다. 
 ```
 # ./build.sh
 ```
 스크립트 실행 후, 다음과 같은 에러가 난다면 `chmod` 명령어로 권한을 변경합니다.
 ```
-# bash: ./start.sh: Permission denied
-# chmod 777 start.sh                        # 권한 변경
+# bash: ./build.sh: Permission denied
+# chmod 777 build.sh                        # 권한 변경
 ```
 정상적으로 실행된다면 아무런 결과내용 없이 약 10초 후에 커서가 돌아옵니다.
 ```
@@ -63,10 +59,10 @@ $ docker exec -it chaincode bash
 .
 #
 ```
-6. 빌드가 끝나면 다음과 같이 패키징된 파일이 생성됩니다.   
+5. 빌드가 끝나면 다음과 같이 패키징된 파일이 생성됩니다.   
 ![image_1](./doc/image_1.png)   
 
-7. 파일을 실행하여 내부에서 해당 체인코드의 컨테이너를 실행합니다. (하이퍼레저 네트워크에서는 peer 가 chaincode 도커 컨테이너를 실행 시킵니다.)
+6. 파일을 실행하여 내부에서 해당 체인코드의 컨테이너를 실행합니다. (하이퍼레저 네트워크에서는 peer 가 chaincode 도커 컨테이너를 실행 시킵니다.)
 ```
 # ./start.sh
 ```
@@ -82,11 +78,11 @@ $ docker exec -it chaincode bash
 2020-07-28 08:20:56.831 UTC [grpc] HandleSubConnStateChange -> DEBU 006 pickfirstBalancer: HandleSubConnStateChange: 0xc0001fc010, CONNECTING
 2020-07-28 08:20:56.842 UTC [grpc] HandleSubConnStateChange -> DEBU 007 pickfirstBalancer: HandleSubConnStateChange: 0xc0001fc010, READY
 ```
-8. 다른 터미널창을 하나 더 엽니다. 이 터미널창에서는 `cli` 도커 컨테이너로 접속 해, 앞서 실행한 체인코드를 install & instantiate 하고 invoke 또는 query 합니다.
+7. 다른 터미널창을 하나 더 엽니다. 이 터미널창에서는 `cli` 도커 컨테이너로 접속 해, 앞서 실행한 체인코드를 install & instantiate 하고 invoke 또는 query 합니다.
 ```shell script
 $ docker exec -it cli bash
 ```
-9. 먼저 install 쉘 파일을 실행하여 체인코드를 install 합니다.
+8. 먼저 install 쉘 파일을 실행하여 체인코드를 install 합니다.
 ```
 # ./install.sh
 ```
@@ -94,7 +90,7 @@ $ docker exec -it cli bash
 ```shell script
 2020-07-28 08:29:23.411 UTC [chaincodeCmd] install -> INFO 04e Installed remotely response:<status:200 payload:"OK" >
 ```
-10. 다음은 instantiate 을 진행합니다.
+9. 다음은 instantiate 을 진행합니다.
 ```
 # ./instantiate.sh
 ```
@@ -107,7 +103,7 @@ instantiate 도 완료되었습니다.
 2020-07-28 09:03:57.594 UTC [msp.identity] Sign -> DEBU 04d Sign: plaintext: 0AC9070A6108031A0C08FDD3FFF80510...A6F9BE86F917A8FB215590FE6C8E1702 
 2020-07-28 09:03:57.595 UTC [msp.identity] Sign -> DEBU 04e Sign: digest: CF7BDEF27FD0AA258623945319B522FC2D9206B0732533AB88FE723D0ED1992A
 ```
-11. 이제 설치된 체인코드의 `invoke` 함수를 호출하여 데이터를 넣고 트랜잭션을 전송 합니다.
+10. 이제 설치된 체인코드의 `invoke` 함수를 호출하여 데이터를 넣고 트랜잭션을 전송 합니다.
 ```
 # peer chaincode invoke -n mycc -c '{"Args":["invoke","a","b","10"]}' -o orderer:7050 -C myc
 ```
@@ -115,7 +111,7 @@ instantiate 도 완료되었습니다.
 ```shell script
 2020-07-28 09:05:13.482 UTC [chaincodeCmd] chaincodeInvokeOrQuery -> INFO 04e Chaincode invoke successful. result: status:200
 ```
-12. invoke 한 데이터를 조회 해보도록 합니다.
+11. invoke 한 데이터를 조회 해보도록 합니다.
 ```shell script
 peer chaincode query -n mycc -c '{"Args":["query","a"]}' -o orderer:7050 -C myc
 ```
